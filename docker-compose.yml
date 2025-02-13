@@ -1,1 +1,23 @@
- 
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: case-join-db
+    environment:
+      POSTGRES_DB: case_join_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - case-join-network
+
+volumes:
+  postgres_data:
+
+networks:
+  case-join-network:
+    driver: bridge
