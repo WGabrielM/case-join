@@ -3,7 +3,7 @@ import { User } from '../types/user';
 export function UserList({ users }: { users: User[] }) {
   return (
     <div className="user-list">
-      <h2>Registered Users</h2>
+      <h2 style={{ marginBottom: '1rem' }}>Registered Users</h2>
       <div className="user-table">
         <table>
           <thead>

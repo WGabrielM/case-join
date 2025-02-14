@@ -5,6 +5,7 @@ import com.join.case_join.model.User;
 import com.join.case_join.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -13,9 +14,12 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final KafkaTemplate<String, User> kafkaTemplate;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, 
+                      KafkaTemplate<String, User> kafkaTemplate) {
         this.userRepository = userRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Transactional
@@ -29,7 +33,12 @@ public class UserService {
 
         var user = new User();
         BeanUtils.copyProperties(userDTO, user);
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        
+        
+        kafkaTemplate.send("user-registration", user.getCpf(), user);
+        
+        return user;
     }
 
     public List<User> getAllUsers() {

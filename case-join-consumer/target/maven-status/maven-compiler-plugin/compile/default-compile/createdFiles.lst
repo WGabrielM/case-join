@@ -1,0 +1,4 @@
+com\join\casejoin\config\KafkaConsumerConfig.class
+com\join\casejoin\consumer\UserConsumerService.class
+com\join\casejoin\model\User.class
+com\join\casejoin\ConsumerApplication.class

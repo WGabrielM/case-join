@@ -1,3 +1,100 @@
+# Case Join Project
+
+A full-stack application using Spring Boot, Kafka, and React.
+
+## Architecture
+
+- Frontend: React + TypeScript + Vite
+- API: Spring Boot
+- Message Broker: Apache Kafka
+- Database: PostgreSQL
+
+## Prerequisites
+
+- Docker
+- Docker Compose
+
+## Running the Application
+
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd case-join
+```
+
+2. Start all services:
+```bash
+docker-compose up -d
+```
+
+This command will start:
+- PostgreSQL database
+- Kafka and Zookeeper
+- Spring Boot API
+- Kafka Consumer Service
+- React Frontend
+
+3. Access the applications:
+- Frontend: http://localhost:3000
+- API: http://localhost:8080
+- Database: localhost:5432 (if needed)
+  - Username: postgres
+  - Password: postgres
+  - Database: case_join_db
+
+## API Endpoints
+
+### Users
+- POST `/api/users` - Create a new user
+```json
+{
+    "name": "Test User",
+    "cpf": "123.456.789-10",
+    "email": "test@example.com",
+    "telephone": "(11) 99999-9999"
+}
+```
+
+## Stopping the Application
+
+To stop all services:
+```bash
+docker-compose down
+```
+
+To stop and remove all data (including database):
+```bash
+docker-compose down -v
+```
+
+## Development
+
+The application uses:
+- React with TypeScript for the frontend
+- Spring Boot for the backend API
+- Kafka for message processing
+- PostgreSQL for data storage
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Check if all containers are running:
+```bash
+docker-compose ps
+```
+
+2. Check container logs:
+```bash
+docker-compose logs -f [service-name]
+```
+Where [service-name] can be: api, consumer, frontend, kafka, postgres
+
+## Contact
+
+For any questions or issues, please contact:
+[Your Contact Information]
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
